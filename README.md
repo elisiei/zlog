@@ -5,7 +5,7 @@ fully featured logging library in go.
 ## features
 
 * 0 deps.
-* minimal code (104 lines of code).
+* minimal code (300 lines of code).
 * extremely simple to use.
 
 ## usage
