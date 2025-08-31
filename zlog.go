@@ -51,15 +51,15 @@ var (
 	ansiReset  = "\u001b[0m"
 	ansiBlack  = "\u001b[30m"
 	levelColor = map[Level]string{
-		LevelDebug: "\u001b[34m",
-		LevelInfo:  "\u001b[32m",
+		LevelDebug: "\u001b[37m",
+		LevelInfo:  "\u001b[34m",
 		LevelWarn:  "\u001b[33m",
 		LevelError: "\u001b[31m",
 		LevelFatal: "\u001b[35;1m",
 	}
 	levelColorBg = map[Level]string{
-		LevelDebug: "\u001b[44m",
-		LevelInfo:  "\u001b[42m",
+		LevelDebug: "\u001b[47m",
+		LevelInfo:  "\u001b[44m",
 		LevelWarn:  "\u001b[43m",
 		LevelError: "\u001b[41m",
 		LevelFatal: "\u001b[45;1m",
