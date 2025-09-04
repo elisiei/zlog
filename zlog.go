@@ -154,7 +154,7 @@ func isTerminal(f *os.File) bool {
 	return fi.Mode()&os.ModeCharDevice != 0
 }
 
-func (l *Logger) log(level Level, msg string, extra F) {
+func (l *Logger) Log(level Level, msg string, extra F) {
 	l.mu.Lock()
 	out, jsonMode, colors, timeStamp, timeFormat, callerOn := l.out, l.json, l.colors, l.timeStamp, l.timeFormat, l.caller
 	baseFields := make(F, len(l.fields))
@@ -261,23 +261,23 @@ func shortFile(path string) string {
 	return path
 }
 
-func (l *Logger) Debug(msg string) { l.log(LevelDebug, msg, nil) }
-func (l *Logger) Info(msg string)  { l.log(LevelInfo, msg, nil) }
-func (l *Logger) Warn(msg string)  { l.log(LevelWarn, msg, nil) }
-func (l *Logger) Error(msg string) { l.log(LevelError, msg, nil) }
-func (l *Logger) Fatal(msg string) { l.log(LevelFatal, msg, nil) }
+func (l *Logger) Debug(msg string) { l.Log(LevelDebug, msg, nil) }
+func (l *Logger) Info(msg string)  { l.Log(LevelInfo, msg, nil) }
+func (l *Logger) Warn(msg string)  { l.Log(LevelWarn, msg, nil) }
+func (l *Logger) Error(msg string) { l.Log(LevelError, msg, nil) }
+func (l *Logger) Fatal(msg string) { l.Log(LevelFatal, msg, nil) }
 
-func (l *Logger) Debugf(f string, a ...any) { l.log(LevelDebug, fmt.Sprintf(f, a...), nil) }
-func (l *Logger) Infof(f string, a ...any)  { l.log(LevelInfo, fmt.Sprintf(f, a...), nil) }
-func (l *Logger) Warnf(f string, a ...any)  { l.log(LevelWarn, fmt.Sprintf(f, a...), nil) }
-func (l *Logger) Errorf(f string, a ...any) { l.log(LevelError, fmt.Sprintf(f, a...), nil) }
-func (l *Logger) Fatalf(f string, a ...any) { l.log(LevelFatal, fmt.Sprintf(f, a...), nil) }
+func (l *Logger) Debugf(f string, a ...any) { l.Log(LevelDebug, fmt.Sprintf(f, a...), nil) }
+func (l *Logger) Infof(f string, a ...any)  { l.Log(LevelInfo, fmt.Sprintf(f, a...), nil) }
+func (l *Logger) Warnf(f string, a ...any)  { l.Log(LevelWarn, fmt.Sprintf(f, a...), nil) }
+func (l *Logger) Errorf(f string, a ...any) { l.Log(LevelError, fmt.Sprintf(f, a...), nil) }
+func (l *Logger) Fatalf(f string, a ...any) { l.Log(LevelFatal, fmt.Sprintf(f, a...), nil) }
 
-func (l *Logger) Debugw(msg string, f F) { l.log(LevelDebug, msg, f) }
-func (l *Logger) Infow(msg string, f F)  { l.log(LevelInfo, msg, f) }
-func (l *Logger) Warnw(msg string, f F)  { l.log(LevelWarn, msg, f) }
-func (l *Logger) Errorw(msg string, f F) { l.log(LevelError, msg, f) }
-func (l *Logger) Fatalw(msg string, f F) { l.log(LevelFatal, msg, f) }
+func (l *Logger) Debugw(msg string, f F, a ...any) { l.Log(LevelDebug, fmt.Sprintf(msg, a...), f) }
+func (l *Logger) Infow(msg string, f F, a ...any)  { l.Log(LevelInfo, fmt.Sprintf(msg, a...), f) }
+func (l *Logger) Warnw(msg string, f F, a ...any)  { l.Log(LevelWarn, fmt.Sprintf(msg, a...), f) }
+func (l *Logger) Errorw(msg string, f F, a ...any) { l.Log(LevelError, fmt.Sprintf(msg, a...), f) }
+func (l *Logger) Fatalw(msg string, f F, a ...any) { l.Log(LevelFatal, fmt.Sprintf(msg, a...), f) }
 
 func SetOutput(w io.Writer)    { std.SetOutput(w) }
 func SetLevel(l Level)         { std.SetLevel(l) }
@@ -300,11 +300,11 @@ func Warnf(f string, a ...any)  { std.Warnf(f, a...) }
 func Errorf(f string, a ...any) { std.Errorf(f, a...) }
 func Fatalf(f string, a ...any) { std.Fatalf(f, a...) }
 
-func Debugw(msg string, f F) { std.Debugw(msg, f) }
-func Infow(msg string, f F)  { std.Infow(msg, f) }
-func Warnw(msg string, f F)  { std.Warnw(msg, f) }
-func Errorw(msg string, f F) { std.Errorw(msg, f) }
-func Fatalw(msg string, f F) { std.Fatalw(msg, f) }
+func Debugw(msg string, f F, a ...any) { std.Debugw(msg, f, a...) }
+func Infow(msg string, f F, a ...any)  { std.Infow(msg, f, a...) }
+func Warnw(msg string, f F, a ...any)  { std.Warnw(msg, f, a...) }
+func Errorw(msg string, f F, a ...any) { std.Errorw(msg, f, a...) }
+func Fatalw(msg string, f F, a ...any) { std.Fatalw(msg, f, a...) }
 
 func ParseLevel(s string) (Level, error) {
 	s = strings.ToLower(strings.TrimSpace(s))
